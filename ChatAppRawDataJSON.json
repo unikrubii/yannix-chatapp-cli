@@ -1,0 +1,56 @@
+[
+    {
+        "id": "1",
+        "name": "Party Room",
+        "chats": [
+            {
+                "id": 1,
+                "message": "Hello"
+            },
+            {
+                "id": 2,
+                "message": "Hi"
+            },
+            {
+                "id": 3,
+                "message": "How are you?"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "name": "Secret Room",
+        "chats": [
+            {
+                "id": 4,
+                "message": "What time is it?"
+            },
+            {
+                "id": 5,
+                "message": "It's 10:00"
+            },
+            {
+                "id": 6,
+                "message": "Thanks"
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "name": "Open Room",
+        "chats": [
+            {
+                "id": 7,
+                "message": "What's up?"
+            },
+            {
+                "id": 8,
+                "message": "Nothing much"
+            },
+            {
+                "id": 9,
+                "message": "Cool"
+            }
+        ]
+    }
+]
