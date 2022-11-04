@@ -25,11 +25,14 @@ def init_data():
 	path = input("Initialize data with file path (default: ChatAppRawDataJSON.json): ")
 	if path == "":
 		path = "ChatAppRawDataJSON.json"
-	with open(path) as f:
-		data = json.load(f)
-		print("Initialize...")
+	try:
+		with open(path) as f:
+			data = json.load(f)
+			print("Initialize...")
 
-		return data
+			return data
+	except json.decoder.JSONDecodeError:
+		print(bcolors.FAIL + "Invalid JSON file" + bcolors.ENDC)
 
 
 def check_action(action, data, cmd):
