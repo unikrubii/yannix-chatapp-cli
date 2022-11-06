@@ -1,6 +1,6 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "name": "Party Room",
         "chats": [
             {
@@ -18,7 +18,7 @@
         ]
     },
     {
-        "id": "2",
+        "id": 2,
         "name": "Secret Room",
         "chats": [
             {
@@ -36,7 +36,7 @@
         ]
     },
     {
-        "id": "3",
+        "id": 3,
         "name": "Open Room",
         "chats": [
             {
