@@ -36,10 +36,10 @@ def init_data():
         with open(path, encoding='utf-8') as f:
             data = json.load(f)
             print("Initialize...")
-
             return data
     except json.decoder.JSONDecodeError:
         print(bcolors.FAIL + "Invalid JSON file" + bcolors.ENDC)
+        return None
 
 
 def check_action(action: int, data: list, cmd: DataHandler):
