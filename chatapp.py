@@ -43,12 +43,16 @@ def init_data():
 
 
 def check_action(action: int, data: list, cmd: DataHandler):
-    """
-    It checks the action and calls the appropriate function
     
+    """
+    It checks the action and calls the appropriate function from the DataHandler class
+
     :param action: The action to be performed
-    :param data: The data that is sent to the server
-    :param cmd: The command object that you want to use
+    :type action: int
+    :param data: list
+    :type data: list
+    :param cmd: DataHandler
+    :type cmd: DataHandler
     """
     if action == 2:
         cmd.getRoomById(data)
