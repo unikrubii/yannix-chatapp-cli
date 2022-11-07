@@ -1,5 +1,5 @@
 import json
-from sys import exit
+import sys
 from color import bcolors
 from getdata import DataHandler
 
@@ -75,7 +75,7 @@ def main():
         cmd = DataHandler()
         if action == 0:
             print(bcolors.BOLD + bcolors.OKCYAN + "Bye" + bcolors.ENDC)
-            exit(0)
+            sys.exit(0)
         if action == 1:
             if data is not None:
                 print(bcolors.WARNING + "Data is already initialized" + bcolors.ENDC)
