@@ -44,6 +44,26 @@ class TestGetRoomById(TestCase):
             bcolors.FAIL + f"No Room with id: {room_id}" + bcolors.ENDC
         )
 
+    def test_get_room_wrong_key(self):
+        """
+        It tests the getRoomById function if the dict_key is wrong.
+        """
+        cmd = DataHandler()
+        data = open_file("wrong_key.json")
+        # Room_id is incorrect
+        room_id = 1
+        self.assertEqual(cmd.getRoomById(data, room_id),
+            bcolors.FAIL + f"No Room with id: {room_id}" + bcolors.ENDC)
+
+        # Room_id is correct but chat_id is incorrect
+        room_id = 2
+        self.assertEqual(cmd.getRoomById(data, room_id),
+            {'id': 2, 'name': 'Secret Room'})
+        # Everything is correct
+        room_id = 3
+        self.assertEqual(cmd.getRoomById(data, room_id),
+            {'id': 3, 'name': 'Open Room'})
+
 
 class TestAllRoom(TestCase):
     def test_get_all_room(self):

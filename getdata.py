@@ -14,7 +14,11 @@ class DataHandler():
         :type room_id: int
         :return: A dictionary with the room id and name.
         """
+        if not isinstance(data, list):
+            raise TypeError
         for room in data:
+            if list(room.keys())[0] != 'id':
+                continue
             if room['id'] == room_id:
                 return {"id": room['id'], "name": room["name"]}
         return bcolors.FAIL + f"No Room with id: {room_id}" + bcolors.ENDC
@@ -25,6 +29,8 @@ class DataHandler():
 
         :param data: The data that is returned from the API call
         """
+        if not isinstance(data, list):
+            raise TypeError
         rooms = []
         for room in data:
             rooms.append({"id": room['id'], "name": room["name"]})
