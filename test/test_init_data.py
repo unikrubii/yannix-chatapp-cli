@@ -16,6 +16,12 @@ class TestInitData(TestCase):
         """
         self.assertRaises(JSONDecodeError, open_file, "not_json.txt")
 
+    def test_empty_json_file(self):
+        """
+        It tests if the file is empty.
+        """
+        self.assertRaises(ValueError, open_file, "empty.json")
+
     def test_open_file(self):
         """
         It tests the open_file function.

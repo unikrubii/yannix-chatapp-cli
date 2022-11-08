@@ -16,7 +16,7 @@ class DataHandler():
         """
         for room in data:
             if room['id'] == room_id:
-                return {"id": room_id, "name": room["name"]}
+                return {"id": room['id'], "name": room["name"]}
         return bcolors.FAIL + f"No Room with id: {room_id}" + bcolors.ENDC
 
     def getAllRoom(self, data: list):

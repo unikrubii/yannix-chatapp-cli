@@ -11,6 +11,8 @@ def open_file(path: str):
     """
     with open(path, encoding='utf-8') as f:
         data = json.load(f)
+        if data == [] or data == {}:
+            raise ValueError
         return data
 
 

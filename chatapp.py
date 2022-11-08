@@ -71,9 +71,8 @@ def check_action(action: int, data: list, cmd: DataHandler):
 
 
 def main():
-    action = 1
     data = None
-    while action != 0:
+    while True:
         try:
             action = print_menu()
         except ValueError:
@@ -94,6 +93,8 @@ def main():
                 print(bcolors.FAIL + "Invalid JSON file" + bcolors.ENDC)
             except FileNotFoundError:
                 print(bcolors.FAIL + "File not found" + bcolors.ENDC)
+            except ValueError:
+                print(bcolors.FAIL + "Nothing in JSON" + bcolors.ENDC)
             if data:
                 print(bcolors.OKGREEN + "Data initialized" + bcolors.ENDC)
         else:
