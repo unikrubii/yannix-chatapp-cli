@@ -44,7 +44,6 @@ class DataHandler():
         for room in data:
             for chat in room['chats']:
                 if chat['id'] == chat_id:
-                    # print({"id": chat_id, "message": chat["message"]})
                     return {"id": chat_id, "message": chat["message"]}
         return bcolors.FAIL + f"No Chat with id: {chat_id}" + bcolors.ENDC
 
