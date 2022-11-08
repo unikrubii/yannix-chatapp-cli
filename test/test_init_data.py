@@ -1,6 +1,7 @@
 from json.decoder import JSONDecodeError
 from unittest import TestCase, main
 from file_load import open_file
+from getdata import DataHandler
 
 
 class TestInitData(TestCase):
@@ -21,6 +22,21 @@ class TestInitData(TestCase):
         It tests if the file is empty.
         """
         self.assertRaises(ValueError, open_file, "empty.json")
+
+    def test_invalid_data_format(self):
+        """
+        It tests if the data is invalid.
+        """
+        cmd = DataHandler()
+        data = open_file("invalid_json_file.json")
+        self.assertRaises(TypeError, cmd.getRoomById, data, 1)
+        self.assertRaises(TypeError, cmd.getRoomById, data, 2)
+        self.assertRaises(TypeError, cmd.getRoomById, data, 3)
+        self.assertRaises(TypeError, cmd.getAllRoom, data)
+        self.assertRaises(TypeError, cmd.getAllChatInRoom, data, 1)
+        self.assertRaises(TypeError, cmd.getAllChatInRoom, data, 2)
+        self.assertRaises(TypeError, cmd.getChatbyId, data, 2)
+        self.assertRaises(TypeError, cmd.getChatbyId, data, 6)
 
     def test_open_file(self):
         """

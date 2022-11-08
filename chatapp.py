@@ -38,40 +38,27 @@ def check_action(action: int, data: list, cmd: DataHandler):
     :type cmd: DataHandler
     """
     if action == 2:
-        # try:
         room_id = int(input("getRoomById: "))
         if room_id <= 0:
             raise ValueError
         print(cmd.getRoomById(data, room_id))
-        # except ValueError:
-        #     print(bcolors.FAIL + "Invalid input" + bcolors.ENDC)
-        #     return
     elif action == 3:
         print(cmd.getAllRoom(data))
     elif action == 4:
-        # try:
         chat_id = int(input("getChatbyId: "))
         if chat_id <= 0:
             raise ValueError
-        # except ValueError:
-        #     print(bcolors.FAIL + "Invalid input" + bcolors.ENDC)
-        #     return
         print(cmd.getChatbyId(data, chat_id))
     elif action == 5:
-        # try:
         room_id = int(input("getAllChatInRoom: "))
         if room_id <= 0:
             raise ValueError
-        # except ValueError:
-        #     print(bcolors.FAIL + "Invalid input" + bcolors.ENDC)
-        #     return
         print(cmd.getAllChatInRoom(data, room_id))
     else:
         print(bcolors.WARNING + "Invalid action" + bcolors.ENDC)
 
 
 def main():
-    # data = None
     while True:
         try:
             action = print_menu()
@@ -84,17 +71,17 @@ def main():
             print(bcolors.BOLD + bcolors.OKCYAN + "Bye" + bcolors.ENDC)
             sys.exit(0)
         if action == 1:
-            # if data is not None:
-            #     print(bcolors.WARNING + "Data is already initialized" + bcolors.ENDC)
-            #     continue
             try:
                 data = init_data()
             except json.decoder.JSONDecodeError:
                 print(bcolors.FAIL + "Invalid JSON file" + bcolors.ENDC)
+                continue
             except FileNotFoundError:
                 print(bcolors.FAIL + "File not found" + bcolors.ENDC)
+                continue
             except ValueError:
                 print(bcolors.FAIL + "Nothing in JSON" + bcolors.ENDC)
+                continue
             if data:
                 print(bcolors.OKGREEN + "Data initialized" + bcolors.ENDC)
         else:
