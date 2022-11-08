@@ -47,7 +47,11 @@ def check_action(action: int, data: list, cmd: DataHandler):
             print(bcolors.FAIL + "Invalid input" + bcolors.ENDC)
             return
     elif action == 3:
-        print(cmd.getAllRoom(data))
+        try:
+            print(cmd.getAllRoom(data))
+        except TypeError:
+            print(bcolors.FAIL + "Invalid data in JSON" + bcolors.ENDC)
+            return
     elif action == 4:
         try:
             chat_id = int(input("getChatbyId: "))
