@@ -41,6 +41,8 @@ class DataHandler():
         :type chat_id: int
         :return: The chat with the given id.
         """
+        if not isinstance(data, list):
+            raise TypeError
         for room in data:
             for chat in room['chats']:
                 for key, _ in chat.items():
@@ -58,11 +60,15 @@ class DataHandler():
         :type data: list
         :return: A list of all the chats in the room with the given id.
         """
+        if not isinstance(data, list):
+            raise TypeError
         for room in data:
-            if room['id'] == room_id:
-                for chat in room['chats']:
-                    for key, _ in chat.items():
-                        if key not in ('id', 'message'):
+            for key, _ in room.items():
+                if key not in ('id', 'chats'):
+                    break
+                if room['id'] == room_id:
+                    for key, message in [chat.items() for chat in room['chats']]:
+                        if key[0] != 'id' or message[0] != 'message':
                             raise KeyError
-                    return room['chats']
+                        return room['chats']
         return bcolors.FAIL + f"No Room with id: {room_id}" + bcolors.ENDC

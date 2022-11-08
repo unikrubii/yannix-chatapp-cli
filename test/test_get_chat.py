@@ -13,13 +13,11 @@ class TestGetChatById(TestCase):
             'id': 1,
             'message': 'Hello.',
         })
-
         chat_id = 5
         self.assertEqual(cmd.getChatbyId(data, chat_id), {
             'id': 5,
             'message': "It's 10:00.",
         })
-
         chat_id = 9
         self.assertEqual(cmd.getChatbyId(data, chat_id), {
             'id': 9,
@@ -34,7 +32,6 @@ class TestGetChatById(TestCase):
             cmd.getChatbyId(data, chat_id),
             bcolors.FAIL +f"No Chat with id: {chat_id}" + bcolors.ENDC
         )
-
         chat_id = 10
         self.assertEqual(
             cmd.getChatbyId(data, chat_id),
@@ -44,10 +41,11 @@ class TestGetChatById(TestCase):
     def test_wrong_key(self):
         cmd = DataHandler()
         data = open_file("wrong_key.json")
+        # chat_id is correct
         chat_id = 3
         self.assertEqual(cmd.getChatbyId(data, chat_id),
             {'id': 3, 'message': 'How are you?'})
-
+        # chat_id is incorrect
         chat_id = 4
         self.assertEqual(cmd.getChatbyId(data, chat_id), 
             bcolors.FAIL + f"No Chat with id: {chat_id}" + bcolors.ENDC)
@@ -57,7 +55,7 @@ class TestGetChatById(TestCase):
         chat_id = 6
         self.assertEqual(cmd.getChatbyId(data, chat_id), 
             bcolors.FAIL + f"No Chat with id: {chat_id}" + bcolors.ENDC)
-
+        # chat_id is correct
         chat_id = 7
         self.assertEqual(cmd.getChatbyId(data, chat_id),
             {'id': 7, 'message': "What's up?"})
@@ -78,21 +76,19 @@ class TestGetAllChatInRoom(TestCase):
             {'id': 2, 'message': 'Hi.'},
             {'id': 3, 'message': 'How are you?'},
         ])
-
         room_id = 2
         self.assertEqual(cmd.getAllChatInRoom(data, room_id), [
             {'id': 4, 'message': "What time is it?"},
             {'id': 5, 'message': "It's 10:00."},
             {'id': 6, 'message': "Thanks."},
         ])
-
         room_id = 3
         self.assertEqual(cmd.getAllChatInRoom(data, room_id), [
             {'id': 7, 'message': "What's up?"},
             {'id': 8, 'message': "Nothing much."},
             {'id': 9, 'message': "Cool."},
         ])
-
+        # Room_id does not exist
         room_id = 4
         self.assertEqual(
             cmd.getAllChatInRoom(data, room_id),
@@ -102,16 +98,16 @@ class TestGetAllChatInRoom(TestCase):
     def test_wrong_key(self):
         cmd = DataHandler()
         data = open_file("wrong_key.json")
+        # Only room_id is incorrect
         room_id = 1
-        self.assertEqual(cmd.getAllChatInRoom(data, room_id), [
-            {'id': 1, 'message': 'Hello.'},
-            {'id': 2, 'message': 'Hi.'},
-            {'id': 3, 'message': 'How are you?'},
-        ])
-
+        self.assertEqual(
+            cmd.getAllChatInRoom(data, room_id),
+            bcolors.FAIL + f"No Room with id: {room_id}" + bcolors.ENDC
+        )
+        # Room id is correct but chat_id and message are incorrect
         room_id = 2
         self.assertRaises(KeyError, cmd.getAllChatInRoom, data, room_id)
-
+        # Everything is correct
         room_id = 3
         self.assertEqual(cmd.getAllChatInRoom(data, room_id), [
             {'id': 7, 'message': "What's up?"},

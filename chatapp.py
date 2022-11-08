@@ -59,9 +59,13 @@ def check_action(action: int, data: list, cmd: DataHandler):
 
 
 def main():
+    data = []
     while True:
         try:
             action = print_menu()
+            if data == [] and action != 1:
+                print(bcolors.FAIL + "Data is not initialized" + bcolors.ENDC)
+                continue
         except ValueError:
             print(bcolors.WARNING + "Invalid action" + bcolors.ENDC)
             continue
