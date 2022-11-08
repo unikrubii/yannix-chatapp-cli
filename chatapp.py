@@ -90,8 +90,8 @@ def main():
             else:
                 try:
                     check_action(action, data, cmd)
-                except TypeError:
-                    print(bcolors.FAIL + "Invalid data in JSON" + bcolors.ENDC)
+                except (TypeError, KeyError):
+                    print(bcolors.FAIL + "Wrong data in JSON" + bcolors.ENDC)
                 except ValueError:
                     print(bcolors.FAIL + "Invalid input" + bcolors.ENDC)
 
