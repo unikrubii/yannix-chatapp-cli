@@ -43,8 +43,11 @@ class DataHandler():
         """
         for room in data:
             for chat in room['chats']:
-                if chat['id'] == chat_id:
-                    return {"id": chat_id, "message": chat["message"]}
+                for key, _ in chat.items():
+                    if key not in ('id', 'message'):
+                        break
+                    if chat['id'] == chat_id:
+                        return {"id": chat_id, "message": chat["message"]}
         return bcolors.FAIL + f"No Chat with id: {chat_id}" + bcolors.ENDC
 
     def getAllChatInRoom(self, data: list, room_id: int):
@@ -57,5 +60,9 @@ class DataHandler():
         """
         for room in data:
             if room['id'] == room_id:
-                return room['chats']
+                for chat in room['chats']:
+                    for key, _ in chat.items():
+                        if key not in ('id', 'message'):
+                            raise KeyError
+                    return room['chats']
         return bcolors.FAIL + f"No Room with id: {room_id}" + bcolors.ENDC
