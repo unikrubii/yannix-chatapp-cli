@@ -1,5 +1,5 @@
 from json.decoder import JSONDecodeError
-from unittest import TestCase
+from unittest import TestCase, main
 from file_load import open_file
 
 
@@ -49,3 +49,7 @@ class TestInitData(TestCase):
                     ]
             }
             ])
+
+
+if __name__ == '__main__':
+    main(verbosity=2)

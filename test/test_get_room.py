@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 from getdata import DataHandler
 from file_load import open_file
 from color import bcolors
@@ -57,3 +57,7 @@ class TestAllRoom(TestCase):
             {'id': 2, 'name': 'Secret Room'},
             {'id': 3, 'name': 'Open Room'},
         ])
+
+
+if __name__ == '__main__':
+    main(verbosity=2)
