@@ -5,11 +5,11 @@
         "chats": [
             {
                 "id": 1,
-                "message": "Hello"
+                "message": "Hello."
             },
             {
                 "id": 2,
-                "message": "Hi"
+                "message": "Hi."
             },
             {
                 "id": 3,
@@ -27,11 +27,11 @@
             },
             {
                 "id": 5,
-                "message": "It's 10:00"
+                "message": "It's 10:00."
             },
             {
                 "id": 6,
-                "message": "Thanks"
+                "message": "Thanks."
             }
         ]
     },
@@ -45,11 +45,11 @@
             },
             {
                 "id": 8,
-                "message": "Nothing much"
+                "message": "Nothing much."
             },
             {
                 "id": 9,
-                "message": "Cool"
+                "message": "Cool."
             }
         ]
     }

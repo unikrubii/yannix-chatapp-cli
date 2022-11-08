@@ -2,14 +2,15 @@ import json
 import sys
 from color import bcolors
 from getdata import DataHandler
+from file_load import init_data
 
 
-def Menu():
+def print_menu():
     """
     It prints the menu and returns the user's choice
     :return: The menu is being returned.
     """
-    MENU = """
+    menu = """
 Action
 1. Initialize data
 2. getRoomById
@@ -20,26 +21,8 @@ Action
 
     """
 
-    print(MENU)
+    print(menu)
     return int(input("Select the action: "))
-
-
-def init_data():
-    """
-    It takes a file path as input, and returns a dictionary of the data in the file
-    :return: The data is being returned.
-    """
-    path = input("Initialize data with file path (default: ChatAppRawDataJSON.json): ")
-    if path == "":
-        path = "ChatAppRawDataJSON.json"
-    try:
-        with open(path, encoding='utf-8') as f:
-            data = json.load(f)
-            print("Initialize...")
-            return data
-    except json.decoder.JSONDecodeError:
-        print(bcolors.FAIL + "Invalid JSON file" + bcolors.ENDC)
-        return None
 
 
 def check_action(action: int, data: list, cmd: DataHandler):
@@ -55,13 +38,34 @@ def check_action(action: int, data: list, cmd: DataHandler):
     :type cmd: DataHandler
     """
     if action == 2:
-        cmd.getRoomById(data)
+        try:
+            room_id = int(input("getRoomById: "))
+            if room_id <= 0:
+                raise ValueError
+            print(cmd.getRoomById(data, room_id))
+        except ValueError:
+            print(bcolors.FAIL + "Invalid input" + bcolors.ENDC)
+            return
     elif action == 3:
-        cmd.getAllRoom(data)
+        print(cmd.getAllRoom(data))
     elif action == 4:
-        cmd.getChatbyId(data)
+        try:
+            chat_id = int(input("getChatbyId: "))
+            if chat_id <= 0:
+                raise ValueError
+        except ValueError:
+            print(bcolors.FAIL + "Invalid input" + bcolors.ENDC)
+            return
+        print(cmd.getChatbyId(data, chat_id))
     elif action == 5:
-        cmd.getAllChatInRoom(data)
+        try:
+            room_id = int(input("getAllChatInRoom: "))
+            if room_id <= 0:
+                raise ValueError
+        except ValueError:
+            print(bcolors.FAIL + "Invalid input" + bcolors.ENDC)
+            return
+        print(cmd.getAllChatInRoom(data, room_id))
     else:
         print(bcolors.WARNING + "Invalid action" + bcolors.ENDC)
 
@@ -71,7 +75,7 @@ def main():
     data = None
     while action != 0:
         try:
-            action = Menu()
+            action = print_menu()
         except ValueError:
             print(bcolors.WARNING + "Invalid action" + bcolors.ENDC)
             continue
@@ -86,8 +90,12 @@ def main():
                 continue
             try:
                 data = init_data()
+            except json.decoder.JSONDecodeError:
+                print(bcolors.FAIL + "Invalid JSON file" + bcolors.ENDC)
             except FileNotFoundError:
                 print(bcolors.FAIL + "File not found" + bcolors.ENDC)
+            if data:
+                print(bcolors.OKGREEN + "Data initialized" + bcolors.ENDC)
         else:
             if data is None:
                 print(bcolors.FAIL + "Please initialize data first" + bcolors.ENDC)
